@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+  <title>Validation</title>
+  <!-- The bootstrap.{css,js} are just to make things look pretty :) -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" />
+  <script type="text/javascript" src="bootstrap/js/jquery-2.1.1.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  <!-- This is our script -->
+  <script type="text/javascript" src="js/validation.js"></script>
+</head>
+
+<body>
+
+  <div class=container>
+    <form class="form-horizontal" name="inputForm">
+    <fieldset>
+
+    <!-- Form Name -->
+    <legend>Validation</legend>
+
+    <!-- Name input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="nameInput">Name</label>  
+      <div class="col-md-6">
+      <input id="nameInput" name="nameInput" placeholder="Bob Black" class="form-control input-md" type="text">
+        
+      </div>
+    </div>
+
+    <!-- Gender Drop Down -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="genderDropDown">Gender</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input id="genderDropDown" name="genderDropDown" class="form-control" placeholder="Female" type="text">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Select
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a href="#">Female</a></li>
+              <li><a href="#">Male</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Address input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="addressInput">Address</label>  
+      <div class="col-md-6">
+      <input id="addressInput" name="addressInput" placeholder="327 Wilhelm" class="form-control input-md" type="text">
+        
+      </div>
+    </div>
+
+    <!-- Email input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="emailInput">Email</label>  
+      <div class="col-md-6">
+      <input id="emailInput" name="emailInput" placeholder="nskinkel@iastate.edu" class="form-control input-md" type="text">
+        
+      </div>
+    </div>
+
+    <!-- Phone input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="phoneInput">Phone</label>  
+      <div class="col-md-6">
+      <input id="phoneInput" name="phoneInput" placeholder="555-555-5555" class="form-control input-md" type="text">
+        
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submitButton"></label>
+      <div class="col-md-4">
+        <button id="submitButton" name="submitButton" class="btn btn-success" onclick="validateForm()">Submit</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+  </div>
+</body>
+</html>
