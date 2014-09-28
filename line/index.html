@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Line</title>
+  <style type="text/css">
+    body {
+      margin: 0 auto;
+      padding: 0;
+    }
+  </style>
+
+  <script src="js/jquery-1.11.1.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var lineCanvas  = $("#lineCanvas")[0];
+      var context     = lineCanvas.getContext("2d");
+      var height      = $("#lineCanvas").height;
+      var width       = $("#lineCanvas").width();
+      var line        = []
+      var cell_width  = 10;
+      var cell_height = 10;
+      var state       = "stopped";
+      var direction   = "right";
+      var update      = false;
+
+      var intervalID = 0;
+
+      $("button[name='stateButton']").click(stateHandler);
+      $("button[name='turnLeft']").click(leftHandler);
+      $("button[name='turnRight']").click(rightHandler);
+
+      function leftHandler() {
+        if (state === "stopped") return;
+        // current position
+        var k = line[line.length - 1];
+        // requested a left turn
+        switch (direction) {
+          case "left": direction = "down"; break;
+          case "right": direction = "up"; break;
+          case "down": direction = "right"; break;
+          case "up": direction = "left"; break;
+        }
+        paintLine();
+      }
+
+      function rightHandler() {
+        if (state === "stopped") return;
+        // current position
+        var k = line[line.length - 1];
+        // requested a right turn
+        switch (direction) {
+          case "left": direction = "up"; break;
+          case "right": direction = "down"; break;
+          case "down": direction = "left"; break;
+          case "up": direction = "right"; break;
+        }
+        paintLine();
+      }
+
+      function stateHandler() {
+        if (state === "stopped") {
+          intervalID = setInterval(paintLine, 150);
+          state = "running";
+          $("#stateButton").html("Stop");
+        }
+        else {
+          clearInterval(intervalID);
+          state = "stopped";    
+          $("#stateButton").html("Start");
+        }
+      }
+
+      function paintLine() {
+        if (line.length === 0) line.push({x: 0, y: 12});
+
+        // get last element
+        var k = line[line.length - 1]
+
+        switch (direction) {
+          case "left": k.x--; break;
+          case "right": k.x++; break;
+          case "up": k.y--; break;
+          case "down": k.y++; break;
+        }
+        line.push(k);
+
+        for (var i = 0; i < line.length; i++) {
+          paintCell(line[i].x, line[i].y);
+        }
+      }
+
+      function paintCell(x, y) {
+        context.fillStyle = "red";
+        context.fillRect(x*cell_width, y*cell_width, cell_width, cell_height);
+      }
+    })
+  </script>
+
+  <body>
+    <div>
+      <button type="button" id="stateButton" name="stateButton">Start</button>
+      <button type="button" id="turnLeft" name="turnLeft">Turn Left</button>
+      <button type="button" id="turnRight" name="turnRight">Turn Right</button>
+    </div>
+
+    <div>
+      <canvas id="lineCanvas" width=650 height=400 style="border:1px solid"></canvas>
+    </div>
+  </body>
+
+</html>
